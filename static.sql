@@ -38,7 +38,7 @@ INSERT INTO template_item (template_item_id, template_id, item_label, creation_t
     (104, 2, 'Arkansas', 1549953333),
     (105, 2, 'California', 1549953333),
     (106, 2, 'Colorado', 1549953333),
-    (107, 2, 'Connecticutt', 1549953333),
+    (107, 2, 'Connecticut', 1549953333),
     (108, 2, 'Delaware', 1549953333),
     (109, 2, 'Florida', 1549953333),
     (110, 2, 'Georgia', 1549953333),
@@ -88,3 +88,11 @@ INSERT INTO list (template_id, uid, creation_time) VALUES
     (1, 2, 1549953466),
     (2, 1, 1549954556),
     (2, 2, 1549954666);
+
+INSERT INTO list_item (template_item_id, uid, template_id, checked, modified_time) VALUES
+    (1, 1, 1, TRUE, 1551469204),
+    (9, 1, 1, TRUE, 1551469204),
+    (143, 1, 2, TRUE, 1551469204),
+    (102, 1, 2, TRUE, 1551469204),
+    (103, 1, 2, TRUE, 1551469204),
+    (105, 1, 2, TRUE, 1551469204);
