@@ -13,17 +13,24 @@ from . import model
 def index():
     """Get homepage data.
 
-    Returns a list of list instances that the user has started.
+    Returns a list of list instances that the user has started, along with user info.
     """
-    res = [
-        {
-            "template_id": list_model.template_id,
-            "name": list_model.name,
-            "creation_time": list_model.creation_time,
-        }
-        for list_model in model.list.get_user_lists(g.logged_in_uid)
-    ]
-    res.sort(key=lambda d: -d["creation_time"])
+    res = {
+        'lists': [
+            {
+                "template_id": list_model.template_id,
+                "name": list_model.name,
+                "creation_time": list_model.creation_time,
+            }
+            for list_model in model.list.get_user_lists(g.logged_in_uid)
+        ],
+        "user": {
+            "uid": g.logged_in_uid,
+            "username": model.user.User(g.logged_in_uid).username,
+        },
+    }
+
+    res['lists'].sort(key=lambda d: -d["creation_time"])
     return Response(json.dumps(res), mimetype='application/json')
 
 
