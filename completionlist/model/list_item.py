@@ -1,4 +1,5 @@
 from .. import db
+from .. import utils
 
 class ListItem:
     table_name = 'list_item'
@@ -42,3 +43,12 @@ def get_user_list_items(uid, template_id):
     return [ListItem(int(r[0]), uid) for r in db.query(
         'SELECT template_item_id FROM template_item WHERE template_id = %s',
         (template_id,))]
+
+
+def update(uid, template_item_id, template_id, checked, details=None):
+    """Create or update a list item for the given user."""
+    return db.query('''
+        REPLACE INTO list_item VALUES
+        (template_item_id, uid, template_id, checked, modified_time, details) VALUES
+        (%s, %s, %s, %s, %s, %s)
+    ''', (template_item_id, uid, template_id, checked, utils.now(), details))

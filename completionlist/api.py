@@ -67,3 +67,15 @@ def list_details(template_id, uid):
         "users": users,
     }
     return Response(json.dumps(res), mimetype='application/json')
+
+
+@app.route('/list/<int:template_id>/<int:template_item_id>', methods=['POST'])
+def list_details(template_id, template_item_id):
+    """Modify a list item in the logged in user's list instance."""
+    # TODO check template_id is instantiated for the logged in user
+    # TODO check template_item_id is in template_id
+    checked = request.form.get('checked', False)
+    details = request.form.get('details')
+    model.list_item.update(
+        g.logged_in_uid, template_item_id, template_id, checked, details=details)
+    # TODO return a 200 response
